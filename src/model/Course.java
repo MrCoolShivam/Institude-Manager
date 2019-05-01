@@ -7,6 +7,8 @@ public class Course {
 	private String branch;
 	private double fees;
 	private String time;
+	
+	
 	public int getId() {
 		return id;
 	}
