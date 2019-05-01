@@ -1,53 +1,46 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import java.awt.Button;
-import java.awt.SystemColor;
-import java.awt.Toolkit;
-
-import javax.swing.JTextField;
-import javax.swing.JSeparator;
-import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Image;
-
-import javax.swing.SwingConstants;
+import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
 
-public class FrameLogin extends JFrame {
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+public class FrameSingUp extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldUserName;
 	private JPasswordField passwordFieldPassword;
+	private JPasswordField passwordFieldConfrimPassword;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*
+	 * public static void main(String[] args) { openSignUpFrame(); }
+	 */
+	public static void openSignUpFrame() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrameLogin frame = new FrameLogin();
+					FrameSingUp frame = new FrameSingUp();
 					frame.setUndecorated(true);
-				    frame.setLocationRelativeTo(null); // center the jframe on screen
+				    frame.setLocationRelativeTo(null);  // center the jframe on screen
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,11 +48,11 @@ public class FrameLogin extends JFrame {
 			}
 		});
 	}
-	
+
 	/**
 	 * Create the frame.
 	 */
- 	public FrameLogin() {
+	public FrameSingUp() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 893, 624);
 		contentPane = new JPanel();
@@ -88,39 +81,32 @@ public class FrameLogin extends JFrame {
 		lblDevelopWhichYou.setBounds(93, 377, 324, 30);
 		panel.add(lblDevelopWhichYou);
 		
-		Button btnLogin = new Button("Login");
-		btnLogin.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				dispose();
-				FrameHomePage.openHomePageFrame();
-			}
-		});
+		Button btnLogin = new Button("SignUp");
 		btnLogin.setFont(new Font("Times New Roman", Font.BOLD, 18));
-		btnLogin.setBackground(SystemColor.textHighlight);
-		btnLogin.setBounds(506, 444, 327, 50);
+		btnLogin.setBackground(new Color(255, 204, 0));
+		btnLogin.setBounds(506, 457, 327, 50);
 		contentPane.add(btnLogin);
 		
 		textFieldUserName = new JTextField();
 		textFieldUserName.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFieldUserName.setBounds(506, 230, 327, 50);
+		textFieldUserName.setBounds(506, 176, 327, 50);
 		contentPane.add(textFieldUserName);
 		textFieldUserName.setColumns(10);
 		
 		passwordFieldPassword = new JPasswordField();
 		passwordFieldPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		passwordFieldPassword.setColumns(10);
-		passwordFieldPassword.setBounds(506, 340, 327, 50);
+		passwordFieldPassword.setBounds(506, 279, 327, 50);
 		contentPane.add(passwordFieldPassword);
 		
 		JLabel lblUsername = new JLabel("UserName");
 		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblUsername.setBounds(506, 187, 117, 30);
+		lblUsername.setBounds(506, 133, 117, 30);
 		contentPane.add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblPassword.setBounds(506, 297, 117, 30);
+		lblPassword.setBounds(506, 236, 117, 30);
 		contentPane.add(lblPassword);
 		
 		JLabel iconClose = new JLabel("");
@@ -143,27 +129,38 @@ public class FrameLogin extends JFrame {
 		iconClose.setBounds(850, 0, 47, 39);
 		contentPane.add(iconClose);
 		
+		JLabel lblNewUserSignup = new JLabel("<html><u>Already User SignIn?</u></html>");
+		lblNewUserSignup.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				dispose();
+				FrameLogin.main(null);
+			}
+		});
+		lblNewUserSignup.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblNewUserSignup.setBounds(604, 537, 127, 22);
+		contentPane.add(lblNewUserSignup);
+		
+		JLabel lblConfrimPassword = new JLabel("Confirm Password");
+		lblConfrimPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblConfrimPassword.setBounds(506, 344, 155, 30);
+		contentPane.add(lblConfrimPassword);
+		
+		passwordFieldConfrimPassword = new JPasswordField();
+		passwordFieldConfrimPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		passwordFieldConfrimPassword.setColumns(10);
+		passwordFieldConfrimPassword.setBounds(506, 387, 327, 50);
+		contentPane.add(passwordFieldConfrimPassword);
+		
 		JLabel loginIcon = new JLabel("");
-		loginIcon.setBounds(604, 13, 186, 162);
+		loginIcon.setBounds(616, 13, 127, 107);
 		
 		try {
-			loginIcon.setIcon(new ImageIcon(ImageIO.read(new File("images/login-icon.png"))));
+			loginIcon.setIcon(new ImageIcon(ImageIO.read(new File("images/sign-up.png"))));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		contentPane.add(loginIcon);
-		
-		JLabel lblNewUserSignup = new JLabel("<html><u>New User SignUp?</u></html>");
-		lblNewUserSignup.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				dispose();
-				FrameSingUp.openSignUpFrame();
-			}
-		});
-		lblNewUserSignup.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		lblNewUserSignup.setBounds(624, 524, 111, 22);
-		contentPane.add(lblNewUserSignup);
 	}
 }
